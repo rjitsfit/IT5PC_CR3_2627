@@ -1,7 +1,12 @@
 function eating () {
     return new Promise ((resolve, reject) => {
         setTimeout (() => {
-            resolve ('Done Eating')
+            const doneEating = true
+            if (doneEating) {
+                resolve ('Done Eating')
+            } else {
+                reject ('Not done eating')
+            }
         }, 1500)
     })
 }
@@ -9,7 +14,10 @@ function eating () {
 function coding () {
     return new Promise ((resolve, reject) => {
         setTimeout (() => {
-            resolve ('Done Coding')
+            const doneCoding = false
+            doneCoding ?
+                resolve ('Done Coding') :
+                reject ('Not done coding')
         }, 2000)
     })
 }
@@ -17,7 +25,11 @@ function coding () {
 function sleeping () {
     return new Promise ((resolve, reject) => {
         setTimeout (() => {
-            resolve ('Done Sleeping')
+            const doneSleeping = true
+            if (doneSleeping)
+                resolve ('Done Sleeping')
+            else
+                reject ('Not done sleeping')
         }, 2500)
     })
 }
@@ -31,4 +43,4 @@ eating ().then (value => {
 }).then (res => {
     console.log (res)
     console.log ('All tasks finished')
-})
+}).catch (err => console.log (err))
