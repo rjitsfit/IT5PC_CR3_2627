@@ -1,10 +1,18 @@
+import { Link } from "react-router";
 import Greetings from "./components/Greetings";
+import { Component } from "react";
 
-export default function App () {
-  return (
+export default class App extends Component {
+  render () {
+    return (
     <>
-      <h1>Hello World!</h1>
-      <Greetings />    
+      <div>
+      <h3>Welcome to React Router with Vite!</h3>
+      <nav>
+        <Link to="/about">Go to About Page</Link>
+      </nav>
+    </div>
     </>
   )
+  }
 }
