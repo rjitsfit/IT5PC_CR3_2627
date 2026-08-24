@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="MainController as vm">
+    <h1>{{ vm.title }}</h1>
+    <p>{{ vm.message }}</p>
+
+    <!-- Two-way data binding for ng-model  -->
+     <h3>Interactive Data Binding</h3>
+     <label for="nameInput">Enter your name</label>
+     <input type="text" id="nameInput" ng-model="vm.userName" placeholder="Type something" />
+
+    <!-- Dynamic display for output  -->
+     <p ng-if="vm.userName">
+        Hello <strong>{{ vm.userName }}</strong>. Welcome to the page.
+     </p>
+
+     <!-- Expressions -->
+      <p>
+        The name is {{ vm.alias.name }} and hero is {{ vm.alias.superhero }}
+      </p>
+
+      <p>
+        The price {{ vm.price }} after interest becomes {{ vm.price * 1.10 }}
+      </p>
+
+    <script src="./angular.min.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>
