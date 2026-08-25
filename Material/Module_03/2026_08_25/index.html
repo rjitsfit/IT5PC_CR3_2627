@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="MainController as ctrl">
+    
+    <h1>{{ ctrl.title }}</h1>
+    <p>{{ ctrl.message }}</p>
+
+    <label for="nameInput">Enter your name</label>
+    <input type="text"
+        id="nameInput"
+        placeholder="Type something"
+        ng-model="ctrl.userName" />
+
+    <p ng-if="ctrl.userName">
+        Hello {{ ctrl.userName }}
+    </p>
+
+    <p>
+        {{ ctrl.alias.name }} and hero name is {{ ctrl.alias.hero }}
+    </p>
+
+    <p>
+        After interest of 10 percent {{ ctrl.pricing * 1.10 }}
+    </p>
+
+
+    <script src="./angular.min.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>
