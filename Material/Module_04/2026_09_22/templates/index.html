@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask CRUD with Templates</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; }
+        .container { max-width: 500px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        ul { list-style: none; padding: 0; }
+        li { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #ddd; }
+        .completed { text-decoration: line-through; color: #888; }
+        .inline-form { display: inline; }
+        button { cursor: pointer; padding: 5px 10px; border: none; border-radius: 4px; }
+        .btn-add { background: #28a745; color: white; }
+        .btn-toggle { background: #007bff; color: white; }
+        .btn-delete { background: #dc3545; color: white; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>My Task List</h2>
+
+    <!-- POST: Form to Create a New Task -->
+    <form method="POST" action="/">
+        <input type="text" name="title" placeholder="Enter new task..." required>
+        <button type="submit" class="btn-add">Add Task</button>
+    </form>
+
+    <ul>
+        {% for task in tasks %}
+        <li>
+            <span class="{{ 'completed' if task.completed else '' }}">
+                {{ task.title }}
+            </span>
+            
+            <div>
+                <!-- PUT WORKAROUND: Form to Toggle/Update Status -->
+                <form method="POST" action="/task/{{ task.id }}/update" class="inline-form">
+                    <button type="submit" class="btn-toggle">
+                        {{ 'Undo' if task.completed else 'Complete' }}
+                    </button>
+                </form>
+
+                <!-- DELETE WORKAROUND: Form to Delete Task -->
+                <form method="POST" action="/task/{{ task.id }}/delete" class="inline-form">
+                    <button type="submit" class="btn-delete">Delete</button>
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+</body>
+</html>
