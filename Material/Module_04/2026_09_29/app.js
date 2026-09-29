@@ -24,6 +24,8 @@ app.get ('/api/users', (req, res) => {
 app.get ('/api/users/:id', (req, res) => {
     const id = Number (req.params.id)
     const user = users.find ((user) => user.id == id)
+    if (!user)
+        return res.status(404).json ({ message : "Not found" })
     res.json (user)
 })
 
@@ -34,7 +36,7 @@ app.post ('/api/users', (req, res) => {
     fs.writeFile ('./MOCK_DATA.json', JSON.stringify (users), (err, data) => {
         if (err)
             console.log (err)
-        res.json ({ message : "Success" }) 
+        res.status(201).json ({ message : "Success" }) 
     })
 })
 
