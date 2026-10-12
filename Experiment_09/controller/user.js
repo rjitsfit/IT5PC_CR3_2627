@@ -7,15 +7,15 @@ async function handleGetAllUsers (req, res) {
 
 async function handleCreateUsers (req, res) {
     const body = req.body
-        if (!body.first_name || !body.last_name || !body.email)
+        if (!body.firstName || !body.lastName || !body.email)
             return res.status (400).json ({message : "Some fields are missing"})
 
     const result = await User.create ({
-        firstName : body.first_name,
-        lastName : body.last_name,
+        firstName : body.firstName,
+        lastName : body.lastName,
         email : body.email,
         gender : body.gender,
-        jobTitle : body.job_title
+        jobTitle : body.jobTitle
     })
 
     console.log (result)
