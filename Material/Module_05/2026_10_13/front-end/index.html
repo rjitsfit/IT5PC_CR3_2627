@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="singleEntry">
+        <label for="singleId">Enter your unique ID</label>
+        <input type="text" id="singleId">
+        <input type="submit" value="Submit">
+    </form>
+
+    <br>
+    <div id="output"></div>
+
+    <form id="postForm">
+        <label for="firstName">Firstname</label>
+        <input id="firstName"></input>
+        <label for="lastName">Lastname</label>
+        <input id="lastName"></input>
+        <label for="email">Email</label>
+        <input id="email"></input>
+        <select id="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+        <label for="jobTitle">Job Title</label>
+        <input id="jobTitle"></input>
+        <input type="submit" value="Submit">
+    </form>
+    <br>
+    <button id="allUsers">Get All Users</button>
+    <div id="getAllUsers"></div>
+
+    <script>
+        document.getElementById ('allUsers').addEventListener ('click', showAll)
+        document.getElementById ('postForm').addEventListener ('submit', postUser)
+        document.getElementById ('singleEntry').addEventListener ('submit', singleUser)
+
+        function singleUser (event) {
+            event.preventDefault ()
+            const id = document.getElementById ('singleId').value
+            const xhr = new XMLHttpRequest ()
+            xhr.open ('GET', `http://localhost:8000/api/users/${id}`, true)
+            
+            xhr.onload = function () {
+                if (this.status == 200) {
+                    const user = JSON.parse (this.responseText)
+
+                    let output = ''
+
+                    
+                    output += `
+                    <ul>
+                        <li> Firstname : ${user.firstName} </li>
+                        <li> Lastname : ${user.lastName} </li>
+                        <li> Email : ${user.email} </li>
+                        <li> Gender : ${user.gender} </li>
+                        <li> Job Title : ${user.jobTitle} </li>
+                    </ul>
+                    `
+
+                    document.getElementById ('output').innerHTML = output
+                }
+            }
+            xhr.send ()
+
+        }
+
+
+        function postUser (event) {
+            event.preventDefault ()
+            const xhr = new XMLHttpRequest ()
+            xhr.open ('POST', 'http://localhost:8000/api/users', true)
+            xhr.setRequestHeader ('Content-Type', 'application/json')
+
+            const newUser = {
+                firstName : document.getElementById('firstName').value,
+                lastName : document.getElementById('lastName').value,
+                email : document.getElementById('email').value,
+                gender : document.getElementById('gender').value,
+                jobTitle : document.getElementById('jobTitle').value
+            }
+
+            xhr.send (JSON.stringify (newUser))
+        }
+
+        function showAll () {
+            const xhr = new XMLHttpRequest ()
+            xhr.open ('GET', 'http://localhost:8000/api/users', true)
+            
+            xhr.onload = function () {
+                if (this.status == 200) {
+                    const users = JSON.parse (this.responseText)
+
+                    let output = ''
+
+                    for (let u in users) {
+                        output += `
+                        <ul>
+                            <li> Firstname : ${users[u].firstName} </li>
+                            <li> Lastname : ${users[u].lastName} </li>
+                            <li> Email : ${users[u].email} </li>
+                            <li> Gender : ${users[u].gender} </li>
+                            <li> Job Title : ${users[u].jobTitle} </li>
+                        </ul>
+                        `
+
+                        document.getElementById ('getAllUsers').innerHTML = output
+                    }
+                }
+            }
+            xhr.send ()
+        }
+    </script>
+</body>
+</html>
