@@ -1,0 +1,17 @@
+[
+    {
+        "id" : 1,
+        "name" : "Harry Potter",
+        "occupation" : "Wizard"
+    },
+    {
+        "id" : 2,
+        "name" : "Ron Weasley",
+        "occupation" : "Wizard"
+    },
+    {
+        "id" : 3,
+        "name" : "Hermione Granger",
+        "occupation" : "Witch"
+    }
+]

@@ -1,0 +1,15 @@
+AJAX - Async JavaScript And XML
+
+AJAX uses XHR - XML Http Request
+
+- AJAX is used for front-end
+- Alternatives for AJAX - (FetchAPI, Axios)
+- Connects front-end to execute Http Request
+- Modification with JSON is possible instead of XML
+
+Ready State Values
+- 0 - Request not initialized
+- 1 - Server Connection Established
+- 2 - Request Recieved
+- 3 - Processing Request
+- 4 - Request Finished and Response is Ready
